@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LINE 聯絡</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+<script>
+tailwind.config={theme:{extend:{colors:{line:'#00C300'}}}}
+</script>
+<style>body{background:#f7f8fa}</style>
+</head>
+<body class="min-h-screen flex items-center justify-center px-4">
+<div class="w-full max-w-xs text-center">
+<h2 class="text-xl font-medium text-gray-800 mb-2">LINE 聯絡</h2>
+<p class="text-sm text-gray-500 mb-6">即將跳轉…</p>
+<div id="qrcode" class="inline-block p-3 border border-gray-200 rounded-xl bg-white mb-6"></div>
+<a href="https://line.me/ti/p/Dmv2AZkcKA" class="block w-full bg-line text-white py-3 rounded-xl font-medium">
+立即加好友
+</a>
+<div class="mt-4">
+<button onclick="copyLink()" class="text-gray-500 text-sm underline">複製連結</button>
+<p id="tip" class="text-sm text-green-600 mt-1 hidden">已複製</p>
+</div>
+</div>
+<script>
+const u="https://line.me/ti/p/Dmv2AZkcKA";
+new QRCode(document.getElementById("qrcode"),{text:u,width:160,height:160});
+setTimeout(()=>location.href=u,2000);
+function copyLink(){
+navigator.clipboard.writeText(u).then(()=>{
+const t=document.getElementById('tip');t.classList.remove('hidden');setTimeout(()=>t.classList.add('hidden'),1500);
+})
+}
+</script>
+</body>
+</html>
